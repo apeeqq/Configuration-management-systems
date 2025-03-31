@@ -222,6 +222,8 @@ Tarkastin komennolla `sudo salt-call --local -l info state.single user.present a
 ![User-tilafunktion käyttäminen](user-present.png)
 
 Kuvassa:
+|**Elementti**|**Kuvaus**|
+|-------------|----------|
 |**ID**|Tunnisteena tässä tapauksessa haluttu käyttäjä|
 |**Comment**|Käyttäjä on luotu, koska sitä ei ollut olemassa aiemmin|
 |**Changes**|Muutokset, joissa <ul><li>gid (group id) = Kertoo ryhmän tunnisteen</li><li>groups = Ryhmät, joihin käyttäjä kuuluu, tässä tapauksessa vain omaan yhden käyttäjän ryhmään</li><li>home = Polku käyttäjän kotihakemistoon</li><li>name = Käyttäjän nimi (fullname on käyttäjän reaalimaailman etu- ja sukunimi)</li><li>passwd = Käyttäjän salasana, jota en antanut komennossa valinnalla, joten x-merkki kertoo käyttäjän olevan ilman salasanaa</li><li>shell = Polku käytettävään ei-interaktiiviseen oletus-shelliin  (Debian. URL: https://wiki.debian.org/Shell)</li><li>uid (user id) = Käyttäjän tunniste</li></ul>|
