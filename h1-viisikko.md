@@ -307,8 +307,6 @@ Karvinen, T. 28.3.2018. Salt Quickstart – Salt Stack Master and Slave on Ubunt
 
 Karvinen, T. 28.10.2021. Run Salt Command Locally. Luettavissa: https://terokarvinen.com/2021/salt-run-command-locally/. Luettu: 27.3.2025.
 
-Suomisanakirja. idempotentti. Luettavissa: https://www.suomisanakirja.fi/idempotentti. Luettu: 31.3.2025.
-
 Stack Exchange Inc. 2017. Salt Stack: Function: pkg.installed. Yum does not update installed package. Luettavissa: https://stackoverflow.com/questions/44130003/salt-stack-function-pkg-installed-yum-does-not-update-installed-package. Luettu: 31.3.2025.
 
 Stack Exchange Inc. 2018. What is the Diff file syntax. Luettavissa: https://stackoverflow.com/questions/4061302/what-is-the-diff-file-syntax. Luettu: 31.3.2025.
