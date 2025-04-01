@@ -34,7 +34,7 @@
 ### Karvinen 2018 (URL: https://terokarvinen.com/2018/03/28/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/)
 
 -	Slave-koneita voidaan hallita master-koneelta, vaikka slavet olisivat NAT:in tai palomuurin takana taikka jopa niiden osoitteita ei tietäisi
--	Master-koneella on oltava julkinen palvelin ja julkinen osoite.
+-	Master-koneella on oltava julkinen palvelin ja julkinen osoite
 -	Master-koneelle on asennettava oma ohjelma ja slave-koneelle oma ohjelmansa
 -	Slave-koneelle on lisättävä master-koneen IP-osoite
 -	Master-koneella on hyväksyttävä slave-avain vielä lopuksi
@@ -86,7 +86,7 @@ Latasin julkisen avaimen kyseiseen hakemistoon komennolla `curl -fsSL https://pa
 Ilman kyseistä julkista avainta en voi lisätä sallittuihin pakettilähteisiin saltin repoja, joista voin ladata tarvittavat paketit salt-työkalun käyttöön.  
 (Stack Exchange Inc. URL: https://stackoverflow.com/questions/26020917/what-is-the-function-of-etc-apt-sources-list-d)
 
-Komennossa:
+**Komennossa:**
 |Syntaksi|Kuvaus|
 |--------|------|
 |**curl**|curl-komennolla voidaan siirtää dataa palvelimelta tai palvelimelle|
@@ -94,8 +94,8 @@ Komennossa:
 |**https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public**|URL, josta tietoja haetaan|
 |**sudo tee /etc/apt/keyrings/salt-archive-keyring.pgp**|Hakemistopolku johon pgp-avain tallennetaan. tee-komennolla luetaan syöte ja tulostetaan se sekä näkyviin näytölle, että tiedostoon|
 
-(Debianin curl-manuaali komennolla: ”man curl”)  
-(Debianin tee-manuaali komennolla: ”man tee”)
+(Debianin curl-manuaali komennolla: `man curl`)  
+(Debianin tee-manuaali komennolla: `man tee`)
 
 Lopputuloksena avain löytyi hakemistosta, kuten alla olevasta kuvasta ilmenee.
 
@@ -128,13 +128,13 @@ Aloitin pkg-tilafunktion testaamisen komennolla `sudo salt-call --local -l info 
 
 ![Tree-ohjelma saltilla](pkg-tree.png)
 
-Vastauksessa:
+**Vastauksessa:**
 |Elementti|Kuvaus|
 |---------|------|
-|**ID: tree**|ohjelma, joka haluttiin asentaa|
-|**Function: pkg.installed**|tilafunktio, jota sovellettiin|
-|**Result: True**|Kaikki paketit ovat asennettu, koska ”Succeeded” kohta ilmaisee, onko juuri kyseisellä komennon ajamisella muuttunut jokin?|
-|**Comment**|Kommentit liittyen suoritukseen. Tässä tapauksessa ilmoittaa, että tree-ohjelma on asennettu tai päivitetty, riippuen idempotentista. Tässä kohdassa ei oteta siis kantaa onko haluttu asia idempotentti|
+|**ID: tree**|Ohjelma, joka haluttiin asentaa|
+|**Function: pkg.installed**|Tilafunktio, jota sovellettiin|
+|**Result: True**|Tilan tarkastamisen onnistuminen tai epäonnistuminen (tässä tapauksessa onnistuminen, koska *True*)|
+|**Comment**|Kommentit liittyen suoritukseen. Tässä tapauksessa ilmoittaa, että tree-ohjelma on asennettu tai päivitetty|
 |**Started**|Aika, jolloin prosessin suorittaminen aloitettiin|
 |**Duration**|Koko prosessiin kulunut aika millisekunteina|
 |**Changes**|Ilmoittaa muutokset, jotka tehtiin suorituksessa. Tässä tapauksessa tree-ohjelma asennettiin, koska ”old” kohdassa ei ole mitään ja ”new” kohdassa on ”2.1.0-1”. ”2.1.0-1” tarkoittaa tree-ohjelman versiota, kuten allaolevasta kuvasta näkyy|
@@ -162,7 +162,7 @@ Vastaus kuvana alla
 
 ![File-tilafunktion käyttäminen](file-managed.png)
 
-Vastauksessa:
+**Vastauksessa:**
 |Elementti|Kuvaus|
 |---------|------|
 |**ID**|tiedosto, jota tarkastellaan|
@@ -182,7 +182,9 @@ Ajoin komennon uudestaan ilman viivaa valinnan edessä, jolloin vastaus oli kute
 
 ![File-tilafunktion käyttäminen korjattuna](file-managed-teksti.png)
 
-Kuvassa:
+**Kuvassa:**
+|Elementti|Kuvaus|
+|---------|------|
 |**Comment**|Tiedosto päivitettiin, koska tiedosto oli jo valmiina olemassa, tästä ilmaisu ”updated”|
 |**Changes**|<ul><li>diff = Vertailee tilaa vanhan ja uuden tiedoston välillä</li><li>--- = Tiedostosta poistettu tietoa riveiltä, jotka ilmoitetaan @@... kohdassa</li><li>+++ = Tiedostoon lisätty tietoa riveille, jotka ilmoitetaan @@... kohdassa</li><li>@@ -0,0 +1 @@ = ”-0” ilmoittaa, että tiedostossa ei ollut ennen tilafunktion suorittamista tietoa. ”,” erottaa tiedostojen rivit. ”0 +1” kertoo tiedostoon lisätyn tiedon sijainnin riveillä 0-1</li><li>+Tämä on testi, jolla testataan file-tilafunktiota = Teksti, joka on lisätty tiedostoon aiemmin ilmoitetuille riveille</li></ul>|
 
@@ -205,7 +207,7 @@ Vastauksesta kuvakaappaus alla.
 
 ![Service-tilafunktion käyttäminen](service-ufw.png)
 
-Kuvassa:
+**Kuvassa:**
 |Elementti|Kuvaus|
 |---------|------|
 |**ID**|Kertoo kohteena olevan palvelun eli ufw|
@@ -221,7 +223,7 @@ Tarkastin komennolla `sudo salt-call --local -l info state.single user.present a
 
 ![User-tilafunktion käyttäminen](user-present.png)
 
-Kuvassa:
+**Kuvassa:**
 |**Elementti**|**Kuvaus**|
 |-------------|----------|
 |**ID**|Tunnisteena tässä tapauksessa haluttu käyttäjä|
@@ -249,7 +251,7 @@ Lisäksi ehto oli epätosi, koska *'/home/aapo/Desktop/tiedosto_joka_ei_ole_olem
 
 ![Cmd-tilafunktion käyttäminen](echo-ei-polkua.png)
 
-Vastauksessa:
+**Vastauksessa:**
 |**Elementti**|**Kuvaus**|
 |-------------|----------|
 |**ID**|Komento, joka tuli suorittaa ehtojen täyttyessä|
@@ -283,7 +285,7 @@ Olenkin aiemmin jo käsitellyt idempotenssia hieman, mutta ajoin saman komennon 
 
 ![Idempotentti vastaus pkg-tilafunktiosta](idempotentti-tree.png)
 
-Kuvassa ilmeni idempotentti info sarakkeessa lauseesta: *”All specified packages are already installed”*. ”Comment” kohdassa, ilmoitettiin sama asia kuin infossa, eli kaikki paketit olivat jo asennettuna. Lisäksi ”Succeeded” ja ”Changes” kohdissa ei ilmoitettu mistään muutoksista, joten tila oli idempotentti. (Toki tilan tarkastelun onnistuminen vaaditaan myös osoittamaan tilan olevan idempotentti.)
+Kuvassa ilmeni idempotentti info sarakkeessa lauseesta: *”All specified packages are already installed”*. ”Comment” kohdassa ilmoitettiin sama asia kuin infossa, eli kaikki paketit olivat jo asennettuna. Lisäksi ”Succeeded” ja ”Changes” kohdissa ei ilmoitettu mistään muutoksista, joten tila oli idempotentti. (Toki tilan tarkastelun onnistuminen vaaditaan myös osoittamaan tilan olevan idempotentti.)
 
 Otan toisen esimerkin. Ajoin komennon `sudo salt-call --local -l info state.single file.managed /home/aapo/Desktop/testi contents="Tämä on testi, jolla testaan file-tilafunktiota"` kaksi kertaa, koska ensimmäisen kerran muutoksia toteutettiin aiemman cmd-tilafunktion johdosta. Toisen komennon ajamisen tulos oli alla olevan kuvan kaltainen.
 
