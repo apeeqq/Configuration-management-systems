@@ -2,9 +2,11 @@
 
 *Pohjana Tero Karvinen 2025: Palvelinten Hallinta 2025 kevät, https://terokarvinen.com/palvelinten-hallinta/*
 
+# h1 Viisikko
+
 ## Käytettävän ympäristön ominaisuudet
 
-- Isäntä:
+- Isäntä
   >- HP Laptop 15s-eq3xxx  
   >- Microsoft Windows 11 Home (versio 24H2)  
   >- AMD Ryzen 7 5825U, Radeon Graphics  
