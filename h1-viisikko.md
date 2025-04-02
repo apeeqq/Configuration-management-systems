@@ -2,6 +2,8 @@
 
 *Pohjana Tero Karvinen 2025: Palvelinten Hallinta 2025 kevät, https://terokarvinen.com/palvelinten-hallinta/*
 
+*2.4.2025 Lisätty ja tarkennettu cmd-tilafunktion tavoitetilaa komennon suorittamisen jälkeen. (Lisätty teksti: Yritin saada aikaiseksi uuden merkkijonon aiemman lisäksi/jatkoksi tiedostoon */home/aapo/Desktop/testi*.)*
+
 # h1 Viisikko
 
 ## Käytettävän ympäristön ominaisuudet
@@ -245,6 +247,7 @@ Jälleen kerran lähteenä saltin oma dokumentaatio, jossa kerrotaan cmd-tilafun
 
 Opettaja Tero Karvinen kertoo artikkelissaan, että cmd-tilafunktion sijasta tulee käyttää ennemmin file-, service- tai user-tilafunktioita (URL: https://terokarvinen.com/2021/salt-run-command-locally/).
 
+Yritin saada aikaiseksi uuden merkkijonon aiemman lisäksi/jatkoksi tiedostoon */home/aapo/Desktop/testi*.
 Halusin koittaa cmd-tilafunktiosta unless-ehtoa, joka toteuttaa komennon, vain ehdon ollessa epätosi.
 
 Komennolla `sudo salt-call --local -l info state.single cmd.run echo 'Tämä on puolestaan testi cmd-tilafunktiosta' unless='/home/aapo/Desktop/tiedosto_joka_ei_ole_olemassa'` tuli mielenkiintoinen vastaus, koska huomasin tiedostopolun puuttuvan, johon merkkijono olisi lisätty.
