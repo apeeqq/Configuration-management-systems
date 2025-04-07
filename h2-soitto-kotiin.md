@@ -52,7 +52,7 @@ vagrant up #Luodaan uudet tyhjät koneet konfigurointitiedoston perusteella
 ### Vagrantin asennus
 **3.4.2025 Klo 15.01**
 
-Aloitin vagrantin asentamisen windows host-koneelleni lataamalla asennustiedoston osoitteesta: https://developer.hashicorp.com/vagrant/install. Versio oli `AMD64, 2.4.3`.
+Aloitin vagrantin asentamisen windows host-koneelleni lataamalla asennustiedoston osoitteesta: https://developer.hashicorp.com/vagrant/install. Versio oli *AMD64, 2.4.3*.
 
 Asennustiedoston käynnistämisen jälkeen hyväksyin ehdot ja syötin pääkäyttäjän salasanan aloittaakseni asennuksen. Asennusprosessin päätteeksi käynnistin uudelleen tietokoneeni, kuten asennusohjelma kehotti. Tämän jälkeen tulostin komentokehotteella vagrantin version windows host koneellani komennolla `C:\Users\aapot>vagrant version`.
 
@@ -66,7 +66,7 @@ Kaikki oli kuten pitääkin, eli vagrant oli asennettu koneelleni.
 
 **4.4.2025 Klo 13.42**
 
-Minun piti ensimmäiseksi tehdä uusi hakemisto uudelle vagrant-tiedostolle, joten powershellissä komento `PS C:\Users\aapot> mkdir twohost_vagrant`.
+Minun piti ensimmäiseksi tehdä uusi hakemisto uudelle *vagrant*-tiedostolle, joten powershellissä komento `PS C:\Users\aapot> mkdir twohost_vagrant`.
 
 ![Twohost-hakemiston luominen](twohosts-vagrant.png)
 
@@ -161,7 +161,7 @@ Tutkittuani asioita, joita minun pitäisi lisätä *Vagrantfile* tiedostoon luod
 
 Olettaisin, että minun ei tarvitse kyseistä menetelmää käyttää, koska minun ei tehtävässä tarvitse asentaa valmiiksi muita ohjelmia, kuin mitä oletuksena koneisiin tulee.
 
-Koneitten määrittäminen tapahtuu taas `config.vm.define metodilla`  
+Koneitten määrittäminen tapahtuu taas `config.vm.define` metodilla  
 (HashiCorp. URL: https://developer.hashicorp.com/vagrant/docs/multi-machine).
 
 Edelleen opettajan Tero Karvisen sivua ja HashiCorpin sivua `config.vm.define` metodin käytöstä mukaillen alan saamaan hahmotuksen, mitä voisin laittaa tiedostoon?  
@@ -288,7 +288,7 @@ Pingasin vielä lisäksi testi1-koneelta komennolla `vagrant@testi1:~$ ping -c 1
 
 **5.4.2025 Klo 19.18**
 
-Löysin netistä virallisen HashiCorpin sivun, jossa kerrottiin, että pitäisi ajaa `vagrant reload` komento `Vagrantfile` tiedoston muuttamisen jälkeen. Joten oletan, että tiedostoa saakin (ja jossain määrin tarkoituskin) muokata.  
+Löysin netistä virallisen HashiCorpin sivun, jossa kerrottiin, että pitäisi ajaa `vagrant reload` komento *Vagrantfile* tiedoston muuttamisen jälkeen. Joten oletan, että tiedostoa saakin (ja jossain määrin tarkoituskin) muokata.  
 (HashiCorp. URL: https://developer.hashicorp.com/vagrant/docs/cli/reload)
 
 Lisäsin opettaja Tero Karvisen materiaaleista scriptin, jolla sain suoraan asennettua *testi1* koneelle salt-master ohjelman ja *testi2* koneelle salt-minion ohjelman.  
@@ -299,6 +299,7 @@ Alla kuva *Vagrantfilestä*.
 ![Vagrantfile skripteillä](vagrantfile-master-minion.png)
 
 Kuvassa:
+
 Tiedoston alussa on skriptit, jotka lataavat master tai minion-ohjelman.
 ```
 testi1.vm.provision :shell, inline: $master #Kertoo, että käynnistyksessä luetaan master-script
