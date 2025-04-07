@@ -300,12 +300,13 @@ Alla kuva *Vagrantfilestä*.
 
 Kuvassa:
 
-Tiedoston alussa on skriptit, jotka lataavat master tai minion-ohjelman.
+Tiedoston alussa on skriptit, jotka lataavat master tai minion-ohjelman. Skriptin asetelmaa voidaan kutsua myös "Here Document" tai "heredoc" termeillä.
 ```
-testi1.vm.provision :shell, inline: $master #Kertoo, että käynnistyksessä luetaan master-script
+testi1.vm.provision :shell, inline: $master #":shell" on shell-provisioneeri | "inline:" kertoo, että skripti luetaan suoraan vagrant-tiedostosta | "$master" kertoo luettavan skriptin
 
-testi2.vm.provision :shell, inline: $minion #Kertoo, että käynnistyksessä luetaan minion-script
+testi2.vm.provision :shell, inline: $minion #":shell" on shell-provisioneeri | "inline:" kertoo, että skripti luetaan suoraan vagrant-tiedostosta | "$minion" määrittää luettavan skriptin
 ```
+(HashiCorp. URL: https://developer.hashicorp.com/vagrant/docs/provisioning/shell#inline-scripts)
 
 Toki nämä ohjelmat saisi asennettua käsinkin, mutta hyvä opetella tulevaisuutta varten hyödyntämään tätä tapaa.
 
@@ -440,6 +441,8 @@ HashiCorp. Provisioning. Luettavissa: https://developer.hashicorp.com/vagrant/do
 HashiCorp. Reload. Luettavissa: https://developer.hashicorp.com/vagrant/docs/cli/reload. Luettu: 5.4.2025.
 
 HashiCorp. Set up your development environment. Luettavissa: https://developer.hashicorp.com/vagrant/tutorials/get-started/setup-project. Luettu: 4.4.2025.
+
+HashiCorp. Shell Provisioner. Luettavissa: https://developer.hashicorp.com/vagrant/docs/provisioning/shell#inline-scripts. Luettu: 7.4.2025.
 
 Karvinen, T. 28.3.2018. Salt Quickstart – Salt Stack Master and Slave on Ubuntu Linux. Luettavissa: https://terokarvinen.com/2018/salt-quickstart-salt-stack-master-and-slave-on-ubuntu-linux/?fromSearch=salt%20quickstart%20salt%20stack%20master%20and%20slave%20on%20ubuntu%20linux. Luettu: 3.4.2025.
 
