@@ -28,7 +28,8 @@
 -	Lisäksi graafista käyttöliittymää ei vaadita vagrantin käyttämiseen
 -	Vagrant-tiedostoon tehdään tarvittavat asetukset, jotka halutaan luotaville virtuaalikoneille  
 ```
-vagrant destroy #Kaikki vagrantilla luodut virtuaalikoneet tuhotaan kaikkine tiedostoineen 
+vagrant destroy #Kaikki vagrantilla luodut virtuaalikoneet tuhotaan kaikkine tiedostoineen
+
 vagrant up #Luodaan uudet tyhjät koneet konfigurointitiedoston perusteella
 ```
 
@@ -107,6 +108,7 @@ Alla olevassa kuvassa näkyy lopputulos *Vagrantfile*-tiedostosta.
 Kuvassa:
 ```
 config.vm.box = "debian/bookworm64" #64 bittinen debian 12 bookworm käyttöjärjestelmä
+
 config.vm.box = "12.20250126.1" #Versio yllä olevasta käyttöjärjestelmästä
 ```
 
@@ -177,8 +179,10 @@ Komennolla `PS C:\Users\aapot\twohost_vagrant> notepad.exe .\Vagrantfile` avasin
 
 Kuvassa:
 ```
-config.vm.define "ape1" do |ape1| #ape1 on muuttuja, joka halutaan luoda, tässä tapauksessa `ape1`
-ape1.vm.hostname = "ape1" #Hostname, joka halutaan antaa koneelle, tässä tapauksessa `ape1`
+config.vm.define "ape1" do |ape1| #ape1 on muuttuja, joka halutaan luoda, tässä tapauksessa "ape1"
+
+ape1.vm.hostname = "ape1" #Hostname, joka halutaan antaa koneelle, tässä tapauksessa "ape1"
+
 ape1.vm.network "private_network", ip: "192.168.88.101" #Verkon määritykset, jotka halutaan antaa koneelle, tässä tapauksessa yksityinen verkko-osoite
 ```
 
@@ -268,6 +272,7 @@ Seuraavaksi koitin pingata koneita, joten testi2-koneella komento oli `vagrant@t
 Komennossa:
 ```
 -c 1 #Lähettää vain yhden ICMP ECHO_REQUEST paketin vastaanottajalle (Debianin man-sivu komennolla man ping)
+
 192.168.88.101 #testi1-koneen yksityinen IP-osoite
 ```
 
@@ -297,6 +302,7 @@ Kuvassa:
 Tiedoston alussa on skriptit, jotka lataavat master tai minion-ohjelman.
 ```
 testi1.vm.provision :shell, inline: $master #Kertoo, että käynnistyksessä luetaan master-script
+
 testi2.vm.provision :shell, inline: $minion #Kertoo, että käynnistyksessä luetaan minion-script
 ```
 
@@ -331,6 +337,7 @@ vagrant@testi2:/etc$ curl -fsSL https://github.com/saltstack/salt-install-guide/
 Ja sitten komennot
 ```
 vagrant@testi2:~$ sudo apt-get update #Päivitin paketit
+
 vagrant@testi2:~$ sudo apt-get install salt-minion #Jolla ladataan salt-minion
 ```
 
