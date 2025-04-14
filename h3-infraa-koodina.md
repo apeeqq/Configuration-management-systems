@@ -266,6 +266,8 @@ Luulen virheen johtuvan käännösvirheestä, koska virheilmoituksessa lukee, et
 
 Huomasin mahdollisen virheen, kun avasin init.sls-tiedoston uudestaan komennolla `sudoedit init.sls`. Minulta puuttui ”:” */tmp/helloaapo* tiedostopolun perästä, joten oletan käännösvirheen liittyvän YAML-kielen virheeseen, jossa YAML-muuntaja ei tunnistanut avain-arvo paria, jota muuntaa. Tavoitteenani olikin kirjoittaa init.sls-tiedostoon validia YAML-kieltä.
 
+![Kaksoispiste lisättynä tiedostoon](kaksoispiste-lisatty-hello.png)
+
 **12.4.2025 Klo 12.19**
 
 Ajoin uudelleen komennon `vagrant@ape99:~$ sudo salt-call --local state.apply hello`, joka meni läpi ja tulosti halutun tuloksen näytölle.
