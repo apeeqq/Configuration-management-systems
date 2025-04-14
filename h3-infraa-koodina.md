@@ -465,6 +465,11 @@ Comment: User paavo is present and up to date #Käyttäjä ”paavo” on jo ole
 Succeeded: 2 #Kaksi onnistunutta suoritusta. ”changed” kohtaa ei ole, joten mikään ei ole muuttunut
 ```
 
+<br>
+<br>
+<br>
+<br>
+
 ## Lähteet
 
 Dancuk, M. 3.3.2022. Bash HereDoc Tutorial With Examples. Luettavissa: https://phoenixnap.com/kb/bash-heredoc. Luettu: 11.4.2025.
