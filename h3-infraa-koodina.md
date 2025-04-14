@@ -14,22 +14,22 @@
   >- x64-pohjainen
   >- Verkkokorttina Realtek WiFi 6
 
-- Paikallinen virtuaalikone
- 	 >- Debian GNU/Linux 12 (bookworm) xfce
- 	 >- Virtualbox
+- Paikalliset virtuaalikoneet
+ 	 >- Debian GNU/Linux 12 (bookworm)
+ 	 >- Virtualbox ja Vagrant
 
 ## x) Lue ja tiivistä. (Tässä x-alakohdassa ei tarvitse tehdä testejä tietokoneella, vain lukeminen tai kuunteleminen ja tiivistelmä riittää. Tiivistämiseen riittää muutama ranskalainen viiva.)
 
 ### (Karvinen 2024. URL: https://terokarvinen.com/2024/hello-salt-infra-as-code/)
 
 -	Moduuleista voidaan kutsua saltin tilafunktioita
-
-```…state.apply (moduulin_nimi)``` #Komennon osa, jolla kutsutaan tiettyä moduulia.
-
+```
+…state.apply (moduulin_nimi) #Komennon osa, jolla kutsutaan tiettyä moduulia.
+```
 ### (VMware, Inc. URL: https://docs.saltproject.io/salt/user-guide/en/latest/topics/overview.html#rules-of-yaml)
 
 -	YAML on merkintäkieli
--	YAML muuntajalla otetaan YAML-tieto ja muutetaan se Pythoniksi
+-	YAML muuntajalla YAML-tieto muutetaan sopivaksi Pythonille
 -	Python-koodia tarvitsee saltin suorittamiseen
 -	YAML:ssa on kolme perustyyppiä elementtien varastointiin:
   >1.	Avain-arvo pari
@@ -37,6 +37,8 @@
   >3.	Sekoitus molempia kohtia 1 ja 2
 
 ## a) Hei infrakoodi! Kokeile paikallisesti (esim 'sudo salt-call --local') infraa koodina. Kirjota sls-tiedosto, joka tekee esimerkkitiedoston /tmp/ -kansioon.
+
+### Vagrantin virtuaalikoneiden asetusten määrittäminen
 
 **11.4.2025 Klo 14.05**
 
@@ -59,6 +61,8 @@ Kopioin tiedot tiedostosta *h2_c\Vagrantfile* tiedostoon *h3\Vagrantfile*.
 Latasin samalla valmiiksi itselleni saltin julkisen pgp-avaimen tuleviin debian-koneisiini, koska on parempi liittää avain erikseen vagrantin heredociin, kuin laittaa heredociin skripti julkisen avaimen lataamisesta.
 
 Latasin avaimen osoitteesta: https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public
+
+### Vagrantfilen muokkaaminen saltille sopivaksi
 
 **11.4.2025 Klo 16.02**
 
@@ -110,6 +114,8 @@ ape1.vm.network "private_network", ip: "192.168.88.103" #master-koneen ape1 IP-o
 ape99.vm.network "private_network", ip: "192.168.88.104" #minion-koneen ape99 IP-osoite
 ```
 
+### Uusien vagrant-virtuaalikoneiden kokeilu
+
 **11.4.2025 Klo 16.44**
 
 Seuraavana vaiheena oli komennolla `PS C:\Users\aapot\Vagrant_confs\h3> vagrant up` käynnistää koneet, joka onnistuikin, mutta lokeista näin heti, että salt-ohjelmien uudelleenkäynnistys ei ilmeisesti toiminut.
@@ -124,9 +130,11 @@ Molemmat koneet ovat ainakin käynnissä, koska tarkistin komennolla `PS C:\User
 
 **11.4.2025 Klo 17.08**
 
-SSH-yhteyden muodostus onnistui molempiin koneisiin. Salt ei ollut edes asentunut koneille, koska huomasin heti vianselvityksessä tiedoston *salt-archive-keyring.pgp * ammottavan tyhjyyttään, joten sudo vaaditaan näköjään echo komennon eteenkin vielä skripteissä. Alla kuva tyhjästä tiedostosta ja ilmoituksesta, että en voi kirjoittaa mitään tiedostoon (avasin tiedoston nanolla ilman root-oikeuksia).
+SSH-yhteyden muodostus onnistui molempiin koneisiin. Salt ei ollut edes asentunut koneille, koska huomasin heti vianselvityksessä tiedoston *salt-archive-keyring.pgp* ammottavan tyhjyyttään, joten sudo vaaditaan näköjään echo komennon eteenkin vielä skripteissä. Alla kuva tyhjästä tiedostosta ja ilmoituksesta, että en voi kirjoittaa mitään tiedostoon (avasin tiedoston nanolla ilman root-oikeuksia).
 
 ![Avain-tiedosto tyhjänä](tyhja-avain.png)
+
+### Julkisen avaimen puuttumisen ratkaiseminen
 
 Komennolla `PS C:\Users\aapot\Vagrant_confs\h3> vagrant destroy` tuhosin koneet ja lähden muokkaamaan skriptejäni.
 
@@ -170,9 +178,11 @@ Annoin komennon
 PS C:\Users\aapot\Vagrant_confs\h3> vagrant destroy #Tuhoaa virtuaalikoneet
 ```
 
+### Saltin asennusongelmien ratkaiseminen
+
 **12.4.2025 Klo 10.30**
 
-Muutin *Vagrantfile*-tiedostoa edelleen, koska huomasin, että minulta puuttui saltin repojen lataamisen jälkeen komennot, jolla päivitän uudestaan paketit ja ennen kaikkea, lataan salt-minion/salt-masterin. Muutosten jälkeen tiedostot näyttivät tältä:
+Muutin *Vagrantfile*-tiedostoa edelleen, koska huomasin, että minulta puuttui saltin repojen lataamisen jälkeen komennot, joilla päivitän uudestaan paketit ja ennen kaikkea, lataan salt-minion/salt-masterin. Muutosten jälkeen tiedostot näyttivät tältä:
 
 ![Salt-minionin asennus skriptillä](install-salt-minion.png)
 
@@ -191,7 +201,7 @@ Kuvassa lisätty:
 ```
 sudo apt-get update #Päivittää paketit
 
-sudo apt-get -qy install salt-minion #Lataa ja asentaa salt-minion ohjelman
+sudo apt-get -qy install salt-master #Lataa ja asentaa salt-master ohjelman
 ```
 
 Tämän jälkeen *Vagrantfile*-tiedoston uudelleenlataaminen komennolla `PS C:\Users\aapot\Vagrant_confs\h3> vagrant reload --provision` ja koneet ylös komennolla `PS C:\Users\aapot\Vagrant_confs\h3> vagrant up`.
@@ -213,6 +223,8 @@ Master-koneelta löytyi kuitenkin minion-koneen avain, joten hyväksyin sen.
 ![Minion-koneen avain hyväksyttiin masterilla](ape99-key-ok.png)
 
 Kyseisessä tehtävässä ei tarvitsisi tosin master-minion verkkoa, koska tarkoitus on ajaa infrat koodina paikallisesti. Tulevissa tehtävissä kuitenkin tarvitsee master-minion verkon yli ajaa infraa koodina, joten loin sen jo tässä vaiheessa.
+
+### Oman moduulin luominen
 
 **12.4.2025 Klo 11.20**
 
@@ -264,6 +276,8 @@ mutta minulle tuli virheilmoitus.
 
 Luulen virheen johtuvan käännösvirheestä, koska virheilmoituksessa lukee, että *”SLS hello does not render to a dictionary”*.
 
+### Käännösvirheen ratkaiseminen
+
 Huomasin mahdollisen virheen, kun avasin init.sls-tiedoston uudestaan komennolla `sudoedit init.sls`. Minulta puuttui ”:” */tmp/helloaapo* tiedostopolun perästä, joten oletan käännösvirheen liittyvän YAML-kielen virheeseen, jossa YAML-muuntaja ei tunnistanut avain-arvo paria, jota muuntaa. Tavoitteenani olikin kirjoittaa init.sls-tiedostoon validia YAML-kieltä.
 
 ![Kaksoispiste lisättynä tiedostoon](kaksoispiste-lisatty-hello.png)
@@ -292,6 +306,8 @@ vagrant@ape99:~$ ls /tmp/helloaapo
 
 Ja sieltähän se löytyi.
 
+### Idempotentin tarkastaminen
+
 Oli vuorossa idempotentin tarkastaminen vielä, joten komento
 ```
 vagrant@ape99:~$ sudo salt-call --local state.apply hello #Vastauksena tulisi olla idempotentti tila jo ajettuun tilafunktioon
@@ -310,6 +326,8 @@ Succeeded: 1 #Yksi onnistunut tilafunktion tarkastaminen, mutta ilman muutoksia 
 ```
 
 ## b) Aja esimerkki sls-tiedostosi verkon yli orjalla.
+
+### Alkuvalmistelut
 
 **14.4.2025 Klo 11.20**
 
@@ -345,6 +363,8 @@ Seuraavaksi kävin minion-koneellani *ape99* varmistamassa, että siellä ei ole
 
 Tiedostoa ei ollut kuten ei pitänytkään olla.
 
+### Moduulin ajaminen minion-koneella verkon yli
+
 Seuraavaksi annoin komennon
 
 ```
@@ -373,6 +393,8 @@ Ja vielä lisäksi tarkistin idempotentin.
 
 ## c) Tee sls-tiedosto, joka käyttää vähintään kahta eri tilafunktiota näistä: package, file, service, user. Tarkista eri ohjelmalla, että lopputulos on oikea. Osoita useammalla ajolla, että sls-tiedostosi on idempotentti.
 
+### Tavoitteen määrittäminen ja tiedoston luominen
+
 **14.4.2025 Klo 15.06**
 
 Aikomukseni oli tehdä moduuli, joka lataa micro-tekstieditorin ja luo uuden käyttäjän, jonka nimi on ”paavo”.
@@ -393,6 +415,8 @@ micro: pkg.installed #Lataa ja asentaa micro-tekstieditorin, jollei sitä ole jo
 paavo: user.present #Luo käyttäjän ”paavo”, jollei sitä ole jo aikaisemmin olemassa minion-koneilla
 ```
 
+### Moduulin ajaminen verkon yli
+
 Komennolla `vagrant@ape1:~$ sudo salt "*" state.apply micro_userpaavo` ajoin moduulin. Vastaukset komentoon ovat kuvina alla (vastaukset olivat pitkät, joten niistä on poimittu vain olennaisimmat).
 
 ![Micro-editorin muutos moduulilla](micro-salt-paavo.png)
@@ -402,7 +426,7 @@ Kuvassa:
 ```
 Comment: The following packages were installed/updated: micro #Muutoksia on tapahtunut, joten micro-tekstieditori asennettiin tai jos se oli jo olemassa minion-koneilla, niin se päivitettiin. Tarkemmat tiedot löytyvät ”Changes” kohdasta
 
-Changes: … #Kohdassa näkyvät kaikki muutokset, jotka ovat tehty pkg-tilafunktiolla moduulistani. Kaikissa kohdissa oli ”new:” kohdassa jokin arvo ja ”old:” kohdissa ei ollut mitään arvoja, joten microa ei ollut entuudestaan minion-koneilla
+Changes: … #Kohdassa näkyvät kaikki muutokset, jotka ovat tehty pkg-tilafunktiolla moduulistani. Kaikissa ”new:” kohdissa oli jokin arvo ja ”old:” kohdissa ei ollut mitään arvoja, joten microa ei ollut entuudestaan minion-koneilla
 ```
 
 Alla olevassa kuvassa on esitetty vastauksen loppu, joka tulee micro-editorin ”Changes”-kohdan jälkeen.
@@ -418,6 +442,8 @@ Changes: #Uuden paavo-käyttäjän tiedot listattuna
 
 Succeeded: 2 (changed=2) #Kaksi onnistunutta suoritusta ja 2 muutosta tehty, joten tila ei ollut idempotentti
 ```
+
+### Cmd-tilafunktiolla tarkastaminen
 
 **14.4.2025 Klo 16.00**
 
@@ -449,7 +475,12 @@ Kuvassa:
 stdout: paavo:x:1001:1001::/home/paavo:/bin/sh #paavo-käyttäjän tiedot minion-koneen "ape99" tiedostosta /etc/passwd
 ```
 
-Todistin vielä sls-tiedostoni minion-koneilla olevan idempotentti ajamalla uudestaan moduulini kaksi kertaa komennolla `vagrant@ape1:~$ sudo salt "*" state.apply micro_userpaavo`.
+### Idempotentin tarkastelu
+
+Todistin vielä sls-tiedostoni minion-koneilla olevan idempotentti ajamalla uudestaan moduulini kaksi kertaa komennolla  
+```
+vagrant@ape1:~$ sudo salt "*" state.apply micro_userpaavo
+```
 
 ![Micro ja paavo-moduuli idempotenttina](micro-paavo-idempotentti.png)
 
