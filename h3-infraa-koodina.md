@@ -381,7 +381,7 @@ Tämän jälkeen loin init.sls tiedoston komennolla `vagrant@ape1:/srv/salt/micr
 
 Lisäsin alla olevan kuvan mukaiset tiedot tiedostoon. Päättelin syntaksin aikaisemmista harjoituksista.
 
-![Package- ja user-tilafunktiot moduulin tiedostossa](micro-users-sls.png)
+![Package- ja user-tilafunktiot moduulin tiedostossa](micro-user-sls.png)
 
 Kuvassa:
 
