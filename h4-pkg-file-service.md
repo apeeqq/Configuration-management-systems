@@ -114,16 +114,16 @@ Laitoin tiedostoon alla olevan kuvan mukaiset tiedot.
 
 ![Konfigurointitiedosto verkkosivulle](pkgonmahtava.conf.png)
 
-”DocumentRoot” ja ”<Directory>” kohdissa olevat tiedostopolut eivät olleet vielä olemassa, mutta tein ne seuraavaksi.
+”DocumentRoot” ja "Directory” kohdissa olevat tiedostopolut eivät olleet vielä olemassa, mutta tein ne seuraavaksi.
 
 Mutta tätä ennen huomasin konfigurointitiedostoni olevan vähän harhaanjohtava nimen perusteella. Laitoin vahingossa nimeksi ”pkgonmahtava.com”, vaikka olisi ollut hyvä laittaa ”pkgonmahtava.com.conf”. Joten vaihdoin nimen komennolla
 ```
 vagrant@ape99:/etc/apache2/sites-available$ sudo mv pkgonmahtava.com pkgonmahtava.com.conf
 ```
 
-### HTML-tiedoston luominen
-
 ![Tiedoston siirtäminen](mv-pkg-conf.png)
+
+### HTML-tiedoston luominen
 
 **17.4.2025 Klo 11.12**
 
@@ -267,7 +267,7 @@ vagrant@ape1:~$ sudo salt * cmd.run "sudo apt-get update" #Päivittää apt-pake
 ```
 jolla päivitin minion-koneen paketit.
 
-![Pakettien päivitys](salt-ap-get-update.png)
+![Pakettien päivitys](salt-apt-get-update.png)
 
 Yllä olevassa kuvassa näkyy, kuinka ”ape99” koneelle päivitettiin paketit.
 
@@ -439,7 +439,7 @@ Konfigurointitiedostosta tuli alla olevan kuvan mukainen
 
 **19.4.2025 Klo 12.48**
 
-Huomasin, että minulla oli nyt väärässä paikassa konfigurointitiedostossa, koska se oli polussa */srv/salt/pkgonmahtava.com.conf* ja sen olisi pitänyt olla polussa */srv/salt/apassi_palvelin/pkgonmahtava.com.conf*.
+Huomasin, että minulla oli nyt väärässä paikassa konfigurointitiedosto, koska se oli polussa */srv/salt/pkgonmahtava.com.conf* ja sen olisi pitänyt olla polussa */srv/salt/apassi_palvelin/pkgonmahtava.com.conf*.
 
 Muutin tiedoston sijaintia komennolla
 ```
@@ -787,7 +787,7 @@ Otin kommentti merkin pois ”Port 22” edestä ja lisäsin sen yläpuolelle ri
 
 ![Ssh-konffitiedosto](sshd-config-1234.png)
 
-Käynnistin ssh:n uudelleen komennolla
+Käynnistin sshd:n uudelleen komennolla
 ```
 vagrant@ape99:/etc/ssh$ sudo systemctl restart sshd
 ```
