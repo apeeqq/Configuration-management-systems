@@ -2,6 +2,8 @@
 
 *Pohjana Tero Karvinen 2025: Palvelinten Hallinta 2025 kevät, https://terokarvinen.com/palvelinten-hallinta/*
 
+(Päivitetty 23.4.2025: Lisätty a-kohtaan tieto oikeasta tiedostosta, jolla tehtävä tulisi ratkaista)
+
 # h4 Pkg-file-service
 
 ## Käytettävän ympäristön ominaisuudet
@@ -705,6 +707,8 @@ Päätin kokeilla watch-menetelmää. Lukiessani raporttiani uudelleen, huomasin
 Seuraavaksi muokkasin init.sls tiedostoani alla olevan kuvan mukaiseksi.
 
 ![Sls-tiedosto](init-watchilla.png)
+
+**Yllä oleva tiedosto on oikea vastaus tehtävään! (Päivitetty 23.4.2025)**
 
 Kuvassa
 ```
