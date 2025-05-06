@@ -19,6 +19,8 @@
 
 ## a) Oma miniprojekti.
 
+### Vagrant
+
 **2.5.2025 Klo 10.53** 
 
 Loin ensimmäiseksi projektilleni oman hakemiston, johon saan luotua vagrant-tiedoston projektin virtuaalikoneita varten. Komentona
@@ -42,7 +44,7 @@ sudo apt-get update #Päivittää paketit
 sudo apt-get install -y ufw #Asentaa ufw-palomuurin  
 sudo ufw allow 22/tcp #Määrittää palomuurin konfigurointiin tiedon, jolla avataan portti 22 sisään ja ulos (sisältää ipv4 ja ipv6), johon otetaan yhteyttä host-koneelta  
 sudo ufw --force enable #Laittaa palomuurin päälle ei-interaktiivisesti  (Stack Exchange Inc. URL: https://unix.stackexchange.com/questions/488033/understanding-the-combination-of-ufw-force-enable)  
-mkdir -p /etc/apt/keyrings #Luodaan tiedosto (tai jos hakemisto on olemassa, ei tehdä mitään) polkuun /etc/apt/keyrings  
+mkdir -p /etc/apt/keyrings #Luodaan hakemisto (tai jos hakemisto on olemassa, ei tehdä mitään) polkuun /etc/apt/keyrings  
 cat << EOF > /etc/apt/keyrings/salt-archive-keyring.pgp #Kirjoittaa syötteen (tässä tapauksessa avaimen) tiedostopolkuun /etc/apt/keyrings/salt-archive-keyring.pgp (Jos tiedostoa ei ole valmiina, se luodaan samalla)  #”EOF” on erotin, jolla pystytään havaitsemaan, mitä halutaan merkkijonon sisältävän
 ```
 
@@ -68,7 +70,7 @@ sudo apt-get update #Päivittää paketit
 sudo apt-get install -y ufw #Asentaa ufw-palomuurin  
 sudo ufw allow 22/tcp #Määrittää palomuurin konfigurointiin tiedon, jolla avataan portti 22 sisään ja ulos (sisältää ipv4 ja ipv6), johon otetaan yhteyttä host-koneelta  
 sudo ufw --force enable #Laittaa palomuurin päälle ei-interaktiivisesti  (Stack Exchange Inc. URL: https://unix.stackexchange.com/questions/488033/understanding-the-combination-of-ufw-force-enable)  
-mkdir -p /etc/apt/keyrings #Luodaan tiedosto (tai jos hakemisto on olemassa, ei tehdä mitään) polkuun /etc/apt/keyrings  
+mkdir -p /etc/apt/keyrings #Luodaan hakemisto (tai jos hakemisto on olemassa, ei tehdä mitään) polkuun /etc/apt/keyrings  
 cat << EOF > /etc/apt/keyrings/salt-archive-keyring.pgp #Kirjoittaa syötteen (tässä tapauksessa avaimen) tiedostopolkuun /etc/apt/keyrings/salt-archive-keyring.pgp (Jos tiedostoa ei ole valmiina, se luodaan samalla)  #”EOF” on erotin, jolla pystytään havaitsemaan, mitä halutaan merkkijonon sisältävän
 ```
 
@@ -86,8 +88,6 @@ master.vm.network "private_network", ip: "192.168.88.105" #master-koneen IP-osoi
 minion1.vm.network "private_network", ip: "192.168.88.106" #minion-koneen ”minion1” IP-osoite  
 ```
 
-**2.5.2025 Klo 15.38**
-
 Komennolla
 
 ```
@@ -95,6 +95,10 @@ PS C:\Users\aapot\Vagrant_confs\h5_miniprojekti> vagrant up
 ```
 
 koneet ylös.
+
+### Tavoite ja perusrunko
+
+**2.5.2025 Klo 15.38**
 
 Otin tavoitteekseni rakentaa moduulin, joka asentaa apache web-palvelimen ja tarjoilee tiedostoja lähiverkossa oleville laitteille sitä kautta. Ajattelin tämän olevan hieman poikkeavampi kuin aikaisemmat tehtävät, mutta ilman ylisuuria ponnisteluja saavutettavissa.
 
@@ -154,6 +158,8 @@ Kävin tarkastamassa, että apache on asennettu minion-koneelle tulostamalla sen
 
 ![apachen versio](apache2-v.png)
 
+### Konfigurointitiedosto apachelle
+
 **3.5.2025 Klo 11.23**
 
 Jatkoin edelleen lisäämällä konfigurointitiedoston master-koneelleni moduulini hakemistoon komennolla
@@ -187,6 +193,8 @@ Kävin tarkastamassa lopputuloksen minion-koneeltani tulostamalla näytölle tie
 ![sites-available hakemisto listattuna](cat-sites-available-files.png)
 
 Kaikki oli kuten pitikin.
+
+### File-tilafunktion hyödyntäminen
 
 **3.5.2025 Klo 18.38**
 
@@ -254,6 +262,8 @@ Yksi muutos on tapahtunut ja viisi onnistunutta suoritusta, joten hyvältä näy
 
 Kaikki näytti jälleen olevan kunnossa.
 
+### Watch
+
 **4.5.2025 Klo 10.40**
 
 Seuraavaksi laitoin sls-tiedostoon rivit, joilla seurataan konfigurointitiedoston ”files.com.conf” muutoksia. Jos muutoksia on tapahtunut tiedostossa, apache käynnistetään uudelleen.
@@ -289,6 +299,8 @@ vagrant@minion1:~$ micro testitiedosto.txt #Luo tiedoston käyttäjän ”vagran
 Lisäsin tiedostoon alla olevan kuvan mukaisen tekstin.
 
 ![testitiedosto](testitiedosto.png)
+
+### Http-pyynnöt ja palomuurin asetukset
 
 Koitin ensimmäiseksi, mitä minion-kone vastaa komennolla
 
@@ -326,7 +338,7 @@ vagrant@minion1:~$ sudo cp testitiedosto.txt /home/vagrant/lan/files.com/
 
 Pitää ottaa huomioon kuitenkin, että jos haluaa muiden käyttäjien ja lähiverkon koneitten ladata tiedostopalvelimelle tiedostoja, on käyttöoikeuksia muutettava, jotta muutkin kuin pääkäyttäjä minion-koneella voi lisätä tiedostoja hakemistoon.
 
-Voisin kuvitella vain pääkäyttäjän oikeuksin olevan tiedostopalvelimen olevan kuitenkin relevantti joissain tilanteissa, esim. organisaation jakaessa tiettyjä mallipohjia yms. tiedostoja, joita voi käyttää pohjana tai joita työntekijät eivät saa muokata. Tai eivät saa ainakaan muokata ennen kuin lataavat tiedoston omalle koneelleen.
+Voisin kuvitella vain pääkäyttäjän oikeuksin tiedostopalvelimen olevan kuitenkin relevantti joissain tilanteissa, esim. organisaation jakaessa tiettyjä mallipohjia yms. tiedostoja, joita voi käyttää pohjana tai joita työntekijät eivät saa muokata. Tai eivät saa ainakaan muokata ennen kuin lataavat tiedoston omalle koneelleen.
 
 Tarkastin vielä tiedoston siirtymisen.
 
@@ -364,6 +376,8 @@ Lataaminen onnistui, josta onkin kuva alla.
 ![tiedoston lataaminen](curl-O-testi.png)
 
 Otin tässä vaiheessa kopiot windows host-koneelleni tiedostot ”files.com.conf” sekä ”init.sls” master-koneeltani. Nämä toimivat perusrunkonani projektille, jonka päälle lähden rakentamaan toimintoja.
+
+### Perusrungon testit tyhjällä koneella
 
 **4.5.2025 Klo 16.57**
 
@@ -515,7 +529,7 @@ Laitoin tämän jälkeen koneet päälle komennolla
 PS C:\Users\aapot\Vagrant_confs\fileserver_apache_testi> vagrant up
 ```
 
-Hyväksyin ensimmäiseksi minionin avaimen, jonka jälkeen tein uuden hakemiston moduulilleni. Lisäsin moduulin hakemistoon aiemmin luomani ”init-sls” ja ”files.com.conf” tiedostot, joihin kopioin aiemmin luomani tiedot.
+Hyväksyin ensimmäiseksi minionin avaimen, jonka jälkeen tein uuden hakemiston moduulilleni. Lisäsin moduulin hakemistoon aiemmin luomani ”init.sls” ja ”files.com.conf” tiedostot, joihin kopioin aiemmin luomani tiedot.
 
 Seuraavaksi ajoin moduulin komennolla
 
@@ -550,6 +564,8 @@ vagrant@masterdemo:~$ curl -O 192.168.88.108/kurlaa
 Ja lopputulos oli toivotunlainen, eli lataus onnistui.
 
 ![pyyntö web-palvelimelta](curl-miniondemo-perusrunko.png)
+
+### Lisäominaisuudet
 
 **4.5.2025 Klo 19.29**
 
@@ -603,13 +619,15 @@ Tulostin vielä tiedoston ”cmd_on_huono_vaihtoehto” näytölle.
 
 ![tiedosto tulostettuna](lynx-voi-voi.png)
 
+### Cmd-tilafunktion korvaaminen
+
 **5.5.2025 Klo 9.43**
 
 Sain mieleeni, että voin koittaa päästä eroon cmd-tilafunktiosta moduulissani, koska voisin kopioida nykyisen palomuurin konfigurointitiedoston minion-koneeltani, jossa on portti 80 (ja 22) auki. Tällöin saisin pohjan, jonka lisään moduuliini.
 
-Tein kaksi uutta ufw:n konffi tiedostoa moduulini hakemistoon, toinen ipv4 ja toinen ipv6 protokollalle. Kopioin sisällön minion-koneeni ”user.rules” ja ”user6.rules” tiedostoista master-koneelleni.
+Tein kaksi uutta ufw:n konffitiedostoa moduulini hakemistoon, toinen ipv4 ja toinen ipv6 protokollalle. Kopioin sisällön minion-koneeni ”user.rules” ja ”user6.rules” tiedostoista master-koneelleni.
 
-Sitten muokkasin sls-tiedostoa, jotta master-koneelta otetaan malli minion-koneelle tehtävään konffi tiedostoon, jossa portti 80 ja 22 on auki.
+Sitten muokkasin sls-tiedostoa, jotta master-koneelta otetaan malli minion-koneelle tehtävään konffitiedostoon, jossa portti 80 ja 22 on auki.
 
 ![sls-tiedosto](init-sls-user-rules-ufw.png)
 
@@ -661,6 +679,8 @@ Vastaus oli samanlainen onnistunut kuin aikaisemminkin.
 
 ![pyyntö lynxillä](lynx-after-user-rules.png)
 
+### Palomuurin uudelleenkäynnistys
+
 **5.5.2025 Klo 10.46**
 
 Estin uudelleen portin 80, koska halusin koittaa palomuurin uudelleenlatausta moduulillani.
@@ -691,6 +711,8 @@ Sitten koitin lynxillä uudestaan, joka onnistuikin.
 
 Otin talteen lopuksi host-koneelleni moduulini.
 
+### Testi puhtaalla koneella
+
 Tein vielä testin puhtaalla koneella.
 
 Alla kuva puhtaalla koneella ajetusta moduulista.
@@ -705,7 +727,9 @@ vagrant@masterdemo:/srv/salt/fileserver$ sudo salt '*' state.single file.managed
 
 Kokeilin curlilla ja lynxillä, mutta ei toiminut.
 
-Minulla oli sen verran kiire tehtävän kanssa, että turvauduin chatGPT:n apuun, joka neuvoi minua käyttämään kyseistä rakennetta sls-tiedostossa, jotta saan ladattua palomuurin oikein:
+### Tekoälyn hyödyntäminen
+
+Minulla oli sen verran kiire tehtävän kanssa, että turvauduin chatGPT:n apuun, joka neuvoi minua käyttämään kyseistä rakennetta sls-tiedostossa, jotta saan uudelleenladattua palomuurin oikein:
 
 ```
 reload-ufw:
@@ -740,7 +764,7 @@ Asensin lynxin master-koneeseen ja tein http-pyynnön minion-koneen ip-osoittees
 
 ![vastaus web-palvelimelta](lynx-with-cmd-wait.png)
 
-Onneksi ”cmd.wait” mahdollistaa idempotentin helpon seurannan, kun moduuli ajetaan uudestaan. Muuttuneita tiloja ei ole näin ollen yhtään. Alla kuva vastauksesta, kun moduuli on ajettu uudelleen.
+Onneksi ”cmd.wait” mahdollistaa idempotenssin helpon seurannan, kun moduuli ajetaan uudestaan. Muuttuneita tiloja ei ole näin ollen yhtään. Alla kuva vastauksesta, kun moduuli on ajettu uudelleen.
 
 ![moduulin vastaus](cmd-wait-idempotent.png)
 
