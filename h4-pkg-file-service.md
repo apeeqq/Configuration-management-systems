@@ -2,7 +2,8 @@
 
 *Pohjana Tero Karvinen 2025: Palvelinten Hallinta 2025 kevät, https://terokarvinen.com/palvelinten-hallinta/*
 
-(Päivitetty 23.4.2025: Lisätty a-kohtaan tieto oikeasta tiedostosta, jolla tehtävä tulisi ratkaista)
+(Päivitetty 23.4.2025: Lisätty a-kohtaan tieto oikeasta tiedostosta, jolla tehtävä tulisi ratkaista)  
+(Päivitetty 15.5.2025: Lisätty oikea tieto konfigurointitiedostojen lajittelusta)
 
 # h4 Pkg-file-service
 
@@ -489,6 +490,8 @@ Lähdin selvittelemään ongelmaa hakemalla tietoa netistä. Katsoin tarkemmin o
 (URL: https://docs.saltproject.io/en/3006/ref/file_server/environments.html)
 
 Näin ollen päättelin opettajan esimerkissä olleen polun osoittavan */srv/salt* hakemistoon, kun itse yritin viitata samalla komennolla hakemistoon */srv/salt/apassi_palvelin*. Todennäköisesti konfigurointitiedostot on hyvä olla *salt* hakemistossa, koska opettajakin on näin tehnyt. Toki se on loogistakin, koska moduulia ajetaan saltilla moduulin hakemiston nimellä.
+
+**Konfigurointitiedostot kannattaa laittaa moduulin hakemistoon, koska muuten ne ovat hujan hajan salt-hakemistossa. Oikea tapa tässä tapauksessa olisi siis laittaa "pkgonmahtava.com.conf" tiedosto hakemistopolkuun "/srv/salt/apassi_palvelin/". (Päivitetty 15.5.2025)**
 
 Joten annoin komennon
 ```
